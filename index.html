@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingeniería en el Aire · Taller de Física</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper:   '#EEF1F2',
+          ink:     '#0F212F',
+          blue:    { DEFAULT:'#2B4C63', light:'#7C97A6' },
+          deep:    '#0B1E2D',
+          flame:   '#FF5A2E',
+          caution: '#FFC647',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body:    ['Inter', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color:#EEF1F2; }
+
+  .grid-paper {
+    background-image:
+      linear-gradient(rgba(43,76,99,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(43,76,99,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .grid-paper-dark {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .stage-num {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chevron { transform: rotate(180deg); }
+  .chevron { transition: transform .25s ease; }
+
+  @keyframes fly {
+    0%   { offset-distance: 0%; opacity: 0; }
+    8%   { opacity: 1; }
+    100% { offset-distance: 100%; opacity: 1; }
+  }
+  .rocket-fly {
+    offset-path: path("M 8 210 C 140 210 210 40 430 20");
+    offset-rotate: auto;
+    animation: fly 2.4s cubic-bezier(.35,.02,.4,1) 1 forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rocket-fly { animation: none; offset-distance: 100%; }
+  }
+
+  .tick { border-left: 1px dashed rgba(43,76,99,0.35); }
+
+  ::selection { background:#FF5A2E; color:#fff; }
+
+  a:focus-visible, summary:focus-visible, button:focus-visible {
+    outline: 2px solid #FF5A2E;
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body class="font-body text-ink antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 bg-paper/90 backdrop-blur border-b border-blue/15">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#inicio" class="font-display font-700 text-lg tracking-tight flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-flame"></span>
+      Ingeniería en el Aire
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-blue">
+      <a href="#objetivo" class="hover:text-flame transition-colors">Objetivo final</a>
+      <a href="#materiales" class="hover:text-flame transition-colors">Materiales</a>
+      <a href="#sesiones" class="hover:text-flame transition-colors">Sesiones</a>
+      <a href="#videos" class="hover:text-flame transition-colors">Videos</a>
+    </div>
+    <a href="#sesiones" class="hidden md:inline-flex text-sm font-semibold bg-ink text-paper px-4 py-2 rounded-full hover:bg-flame transition-colors">
+      Ver el programa
+    </a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="inicio" class="relative bg-deep text-paper overflow-hidden pt-16">
+  <div class="absolute inset-0 grid-paper-dark"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-deep via-deep/70 to-transparent"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="font-mono text-xs text-caution tracking-wide">Taller trimestral · 10 sesiones de 40 min</p>
+      <h1 class="font-display font-700 text-4xl sm:text-5xl md:text-6xl leading-[1.05] mt-4">
+        La física no se explica en el pizarrón. Se construye, se prueba y a veces sale volando.
+      </h1>
+      <p class="mt-6 text-lg text-blue-light max-w-md">
+        Un programa práctico de introducción a la ingeniería para estudiantes de secundaria. Sin fórmulas que intimiden, con manos en la masa desde la primera sesión hasta el lanzamiento final.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="#objetivo" class="bg-flame text-white font-semibold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors">
+          Conocer el reto final
+        </a>
+        <a href="#sesiones" class="border border-paper/30 font-semibold px-6 py-3 rounded-full hover:border-caution hover:text-caution transition-colors">
+          Explorar las 10 sesiones
+        </a>
+      </div>
+
+      <dl class="mt-14 grid grid-cols-3 gap-6 max-w-md">
+        <div class="tick pl-3">
+          <dt class="text-2xl font-display font-700">10</dt>
+          <dd class="text-xs text-blue-light">sesiones</dd>
+        </div>
+        <div class="tick pl-3">
+          <dt class="text-2xl font-display font-700">40'</dt>
+          <dd class="text-xs text-blue-light">por sesión</dd>
+        </div>
+        <div class="tick pl-3">
+          <dt class="text-2xl font-display font-700">45°</dt>
+          <dd class="text-xs text-blue-light">ángulo de lanzamiento</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="relative h-72 md:h-96">
+      <svg viewBox="0 0 440 230" class="w-full h-full">
+        <path d="M 8 210 C 140 210 210 40 430 20" fill="none" stroke="#2B4C63" stroke-width="1.5" stroke-dasharray="4 6"/>
+        <circle cx="8" cy="210" r="4" fill="#7C97A6"/>
+        <circle cx="430" cy="20" r="4" fill="#FFC647"/>
+        <text x="8" y="226" fill="#7C97A6" font-size="11" font-family="JetBrains Mono, monospace">base</text>
+        <text x="390" y="14" fill="#FFC647" font-size="11" font-family="JetBrains Mono, monospace">apogeo</text>
+      </svg>
+      <div class="rocket-fly absolute top-0 left-0 text-2xl">🚀</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OBJETIVO FINAL ============ -->
+<section id="objetivo" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+  <div class="grid md:grid-cols-[280px_1fr] gap-12">
+    <div>
+      <p class="font-mono text-xs text-flame">Cierre del trimestre</p>
+      <h2 class="font-display font-700 text-3xl md:text-4xl mt-3 leading-tight">
+        El reto final: diseñar, construir y lanzar
+      </h2>
+      <p class="mt-4 text-blue">
+        Todo lo que se aprende en las diez sesiones converge en un solo proyecto que el grupo construye desde cero.
+      </p>
+    </div>
+
+    <div class="border border-blue/20 rounded-2xl bg-white/60 overflow-hidden">
+      <div class="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-blue/15">
+        <div class="p-8">
+          <h3 class="font-display font-600 text-xl">Base de lanzamiento</h3>
+          <p class="mt-3 text-sm text-blue leading-relaxed">
+            Estructura autoportante fabricada en tubería y conexiones de PVC, diseñada y ensamblada por los propios estudiantes. Incluye soporte ajustable para fijar el ángulo de disparo y un sistema de liberación por cuerda.
+          </p>
+          <ul class="mt-5 space-y-2 text-sm text-ink/80">
+            <li class="flex gap-2"><span class="text-flame">＋</span> Tubería y codos de PVC</li>
+            <li class="flex gap-2"><span class="text-flame">＋</span> Soporte fijo a 45°</li>
+            <li class="flex gap-2"><span class="text-flame">＋</span> Mecanismo de liberación remoto</li>
+          </ul>
+        </div>
+        <div class="p-8">
+          <h3 class="font-display font-600 text-xl">Cohete de agua y aire</h3>
+          <p class="mt-3 text-sm text-blue leading-relaxed">
+            Fabricado con botellas de refresco de gran volumen, combina agua como masa de reacción y aire comprimido como fuente de energía. Se presuriza con una bomba de bicicleta convencional.
+          </p>
+          <ul class="mt-5 space-y-2 text-sm text-ink/80">
+            <li class="flex gap-2"><span class="text-flame">＋</span> Botellas de soda de 2–3 L</li>
+            <li class="flex gap-2"><span class="text-flame">＋</span> Aletas y cono de nariz</li>
+            <li class="flex gap-2"><span class="text-flame">＋</span> Presurización con bomba de bicicleta</li>
+          </ul>
+        </div>
+      </div>
+      <div class="px-8 py-5 bg-ink text-paper text-sm flex flex-wrap items-center justify-between gap-3">
+        <span>Lanzamiento en el patio de la escuela, frente a todo el grupo.</span>
+        <span class="font-mono text-caution">ángulo: 45°</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MATERIALES ============ -->
+<section id="materiales" class="bg-white/60 border-y border-blue/15">
+  <div class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+    <p class="font-mono text-xs text-flame">Logística</p>
+    <h2 class="font-display font-700 text-3xl md:text-4xl mt-3">Materiales</h2>
+    <p class="mt-4 text-blue max-w-xl">
+      La escuela reúne el material general antes de iniciar el trimestre; cada sesión utiliza además insumos puntuales que se detallan a continuación.
+    </p>
+
+    <!-- Materiales generales -->
+    <div class="mt-12">
+      <h3 class="font-display font-600 text-lg mb-4">Manifiesto general (adquiere la escuela)</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-blue/15 border border-blue/15 rounded-xl overflow-hidden">
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Estructura</p><p class="text-sm text-blue mt-1">Tubería PVC 1/2", codos, tes y tapones</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Propulsión</p><p class="text-sm text-blue mt-1">Bomba de bicicleta con manómetro, válvula de liberación</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Cohetes</p><p class="text-sm text-blue mt-1">Botellas de soda 2–3 L, cartón, cinta de embalaje</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Seguridad</p><p class="text-sm text-blue mt-1">Gafas protectoras, conos, cinta métrica larga</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Taller</p><p class="text-sm text-blue mt-1">Pistolas de silicón caliente, cúter, tijeras</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Ensayo</p><p class="text-sm text-blue mt-1">Espagueti crudo, malvaviscos, hilo, popotes</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Registro</p><p class="text-sm text-blue mt-1">Cronómetro, cinta métrica, bitácora impresa</p></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Consumibles</p><p class="text-sm text-blue mt-1">Agua, cinta adhesiva, cartulina, marcadores</p></div>
+      </div>
+    </div>
+
+    <!-- Materiales por sesión -->
+    <div class="mt-14 overflow-x-auto">
+      <h3 class="font-display font-600 text-lg mb-4">Lo que se usa en cada sesión</h3>
+      <table class="w-full text-sm border-collapse min-w-[640px]">
+        <thead>
+          <tr class="text-left text-blue border-b border-blue/20">
+            <th class="py-3 pr-4 font-medium w-16">#</th>
+            <th class="py-3 pr-4 font-medium">Sesión</th>
+            <th class="py-3 font-medium">Material específico</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-blue/10">
+          <tr><td class="py-3 pr-4 stage-num text-flame">01</td><td class="py-3 pr-4">Torre de espaguetis</td><td class="py-3 text-blue">Espagueti crudo, malvaviscos, cinta métrica</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">02</td><td class="py-3 pr-4">Fuerzas y movimiento</td><td class="py-3 text-blue">Carritos de juguete, canicas, rampa de cartón</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">03</td><td class="py-3 pr-4">Presión y aire</td><td class="py-3 text-blue">Jeringas, globos, botella PET vacía</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">04</td><td class="py-3 pr-4">Aerodinámica</td><td class="py-3 text-blue">Hojas de papel, cartulina, ventilador de mesa</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">05</td><td class="py-3 pr-4">Estabilidad de vuelo</td><td class="py-3 text-blue">Popotes, clips, plastilina</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">06</td><td class="py-3 pr-4">Diseño del cohete</td><td class="py-3 text-blue">Hojas de boceto, regla, calculadora</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">07</td><td class="py-3 pr-4">Construcción del cuerpo</td><td class="py-3 text-blue">Botellas de soda, cartón, silicón caliente</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">08</td><td class="py-3 pr-4">Base de lanzamiento</td><td class="py-3 text-blue">Tubería PVC, codos, tes, pegamento para PVC</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">09</td><td class="py-3 pr-4">Pruebas y ajustes</td><td class="py-3 text-blue">Bomba de bicicleta, agua, cinta métrica</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">10</td><td class="py-3 pr-4">Día de lanzamiento</td><td class="py-3 text-blue">Gafas protectoras, conos, cámara de video</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SESIONES ============ -->
+<section id="sesiones" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+  <p class="font-mono text-xs text-flame">Programa</p>
+  <h2 class="font-display font-700 text-3xl md:text-4xl mt-3">Las 10 sesiones</h2>
+  <p class="mt-4 text-blue max-w-xl">
+    Cada sesión abre con una presentación breve y dedica la mayor parte del tiempo a construir o probar algo con las manos.
+  </p>
+
+  <div class="mt-12 divide-y divide-blue/15 border-t border-b border-blue/15">
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">01</span>
+          <span class="font-display font-600 text-lg md:text-xl">Torre de espaguetis</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Reto introductorio en equipos: construir la torre autoportante más alta con espagueti y malvaviscos. Primer acercamiento a estructuras, triangulación y trabajo en equipo bajo límite de tiempo.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">02</span>
+          <span class="font-display font-600 text-lg md:text-xl">Fuerzas y movimiento</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Las leyes de Newton explicadas con carritos, rampas y empujones, sin ecuaciones en el pizarrón. Los estudiantes predicen y luego comprueban qué pasa al cambiar peso, fricción e inclinación.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">03</span>
+          <span class="font-display font-600 text-lg md:text-xl">Presión y aire</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Qué es el aire comprimido y cómo empuja: experimentos con jeringas y globos para sentir la presión antes de nombrarla. Primer contacto con la idea que hará volar el cohete final.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">04</span>
+          <span class="font-display font-600 text-lg md:text-xl">Aerodinámica y resistencia</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Por qué algunas formas se mueven mejor en el aire. Se doblan y comparan siluetas de papel frente a un ventilador para observar de forma directa la resistencia del aire.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">05</span>
+          <span class="font-display font-600 text-lg md:text-xl">Estabilidad de vuelo</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Centro de masa, centro de presión y para qué sirven las aletas. Se arman y prueban pequeños planeadores de popote para entender qué hace que un objeto vuele derecho o dando vueltas.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">06</span>
+          <span class="font-display font-600 text-lg md:text-xl">Diseño del cohete</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Cada equipo bocetea su propio cohete: número de botellas, forma del cono y ubicación de las aletas, aplicando lo visto en las sesiones anteriores antes de tocar materiales.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">07</span>
+          <span class="font-display font-600 text-lg md:text-xl">Construcción del cuerpo</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Manos a la obra: ensamblaje de botellas, cono de nariz y aletas siguiendo el boceto de la sesión anterior. Cada equipo termina la sesión con el cuerpo de su cohete listo.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">08</span>
+          <span class="font-display font-600 text-lg md:text-xl">La base de lanzamiento</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Construcción grupal de la base de PVC: corte, ensamblaje y fijación del ángulo de 45°. Se conecta y revisa la bomba de bicicleta y el mecanismo de liberación.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">09</span>
+          <span class="font-display font-600 text-lg md:text-xl">Pruebas y ajustes</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Lanzamientos de práctica a baja presión para calibrar cantidad de agua, presión de aire y ajustes de aletas. Se registran resultados en una bitácora para comparar variables.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+    <details class="group py-5">
+      <summary class="flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-5">
+          <span class="stage-num text-flame text-sm">10</span>
+          <span class="font-display font-600 text-lg md:text-xl">Día de lanzamiento</span>
+        </div>
+        <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pt-4 pl-0 md:pl-14 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+        <p class="text-sm text-blue max-w-xl">Lanzamiento final de cada cohete a máxima presión frente al grupo, medición de distancia y altura estimada, y cierre del trimestre con la premiación del vuelo más exitoso.</p>
+        <a href="#" class="text-sm font-semibold border border-blue/30 rounded-full px-4 py-2 whitespace-nowrap hover:border-flame hover:text-flame transition-colors">Ver presentación</a>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ============ VIDEOS ============ -->
+<section id="videos" class="bg-deep text-paper">
+  <div class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+    <p class="font-mono text-xs text-caution">Evidencia en vuelo</p>
+    <h2 class="font-display font-700 text-3xl md:text-4xl mt-3">Videos de demostración</h2>
+    <p class="mt-4 text-blue-light max-w-xl">
+      Aquí se incrustarán las grabaciones de los lanzamientos reales del cohete de agua y aire una vez realizados los ensayos.
+    </p>
+
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
+        <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
+          <div class="w-12 h-12 rounded-full border border-paper/30 flex items-center justify-center">
+            <div class="w-0 h-0 border-y-[7px] border-y-transparent border-l-[11px] border-l-paper ml-1"></div>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="font-semibold text-sm">Prueba de presión de cabina</p>
+          <p class="text-xs text-blue-light mt-1">Sesión 9 · por incrustar</p>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
+        <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
+          <div class="w-12 h-12 rounded-full border border-paper/30 flex items-center justify-center">
+            <div class="w-0 h-0 border-y-[7px] border-y-transparent border-l-[11px] border-l-paper ml-1"></div>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="font-semibold text-sm">Lanzamiento final, toma general</p>
+          <p class="text-xs text-blue-light mt-1">Sesión 10 · por incrustar</p>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
+        <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
+          <div class="w-12 h-12 rounded-full border border-paper/30 flex items-center justify-center">
+            <div class="w-0 h-0 border-y-[7px] border-y-transparent border-l-[11px] border-l-paper ml-1"></div>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="font-semibold text-sm">Cámara lenta del despegue</p>
+          <p class="text-xs text-blue-light mt-1">Sesión 10 · por incrustar</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-8 text-xs text-blue-light font-mono">
+      // reemplazar cada contenedor por &lt;video&gt; o &lt;iframe&gt; con el material grabado
+    </p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-blue">
+  <p>Ingeniería en el Aire — taller trimestral de física aplicada.</p>
+  <p class="font-mono text-xs">10 sesiones · 45°</p>
+</footer>
+
+</body>
+</html>
