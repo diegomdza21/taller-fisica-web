@@ -6,7 +6,9 @@
 <title>Ingeniería en el Aire · Taller de Física</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <script>
   tailwind.config = {
     theme: {
@@ -32,6 +34,12 @@
   html { scroll-behavior: smooth; }
   body { background-color:#EEF1F2; }
 
+  .grid-paper, .grid-paper-dark {
+    /* contain isolates these decorative layers so they don't get
+       recomputed as part of the rest of the page's paint work */
+    contain: strict;
+    will-change: auto;
+  }
   .grid-paper {
     background-image:
       linear-gradient(rgba(43,76,99,0.10) 1px, transparent 1px),
@@ -63,6 +71,7 @@
     offset-path: path("M 8 210 C 140 210 210 40 430 20");
     offset-rotate: auto;
     animation: fly 2.4s cubic-bezier(.35,.02,.4,1) 1 forwards;
+    will-change: offset-distance, opacity;
   }
   @media (prefers-reduced-motion: reduce) {
     .rocket-fly { animation: none; offset-distance: 100%; }
@@ -81,7 +90,7 @@
 <body class="font-body text-ink antialiased">
 
 <!-- ============ NAV ============ -->
-<header class="fixed top-0 inset-x-0 z-50 bg-paper/90 backdrop-blur border-b border-blue/15">
+<header class="fixed top-0 inset-x-0 z-50 bg-paper/[0.98] border-b border-blue/15">
   <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
     <a href="#inicio" class="font-display font-700 text-lg tracking-tight flex items-center gap-2">
       <span class="w-2.5 h-2.5 rounded-full bg-flame"></span>
@@ -146,10 +155,17 @@
         <text x="8" y="226" fill="#7C97A6" font-size="11" font-family="JetBrains Mono, monospace">base</text>
         <text x="390" y="14" fill="#FFC647" font-size="11" font-family="JetBrains Mono, monospace">apogeo</text>
       </svg>
-      <div class="rocket-fly absolute top-0 left-0 text-2xl">🚀</div>
+      <div class="rocket-fly absolute top-0 left-0 text-2xl" id="rocket">🚀</div>
     </div>
   </div>
 </section>
+<script>
+  // Es una animación de un solo disparo: al terminar, quitamos will-change
+  // para no dejar la capa de composición reservada indefinidamente.
+  document.getElementById('rocket')?.addEventListener('animationend', function () {
+    this.style.willChange = 'auto';
+  }, { once: true });
+</script>
 
 <!-- ============ OBJETIVO FINAL ============ -->
 <section id="objetivo" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
@@ -458,7 +474,7 @@
 <!-- ============ FOOTER ============ -->
 <footer class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-blue">
   <p>Ingeniería en el Aire — taller trimestral de física aplicada.</p>
-  <p class="font-mono text-xs">10 sesiones · 45°</p>
+  <p class="font-mono text-xs">v1.2</p>
 </footer>
 
 </body>
