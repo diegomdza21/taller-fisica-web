@@ -85,6 +85,26 @@
     outline: 2px solid #FF5A2E;
     outline-offset: 3px;
   }
+
+  /* ============ CHATBOT ============ */
+  #chat-toggle {
+    box-shadow: 0 10px 25px -5px rgba(15,33,47,0.35);
+  }
+  #chat-panel {
+    box-shadow: 0 20px 45px -10px rgba(15,33,47,0.35);
+  }
+  #chat-log::-webkit-scrollbar { width: 6px; }
+  #chat-log::-webkit-scrollbar-thumb { background: rgba(43,76,99,0.25); border-radius: 999px; }
+  .chat-bubble-bot {
+    background: #EEF1F2;
+    color: #0F212F;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-bubble-user {
+    background: #0F212F;
+    color: #EEF1F2;
+    border-bottom-right-radius: 4px;
+  }
 </style>
 </head>
 <body class="font-body text-ink antialiased">
@@ -222,17 +242,20 @@
       <h3 class="font-display font-600 text-lg mb-4">Manifiesto general (adquiere la escuela)</h3>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-blue/15 border border-blue/15 rounded-xl overflow-hidden">
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Estructura</p><p class="text-sm text-blue mt-1">Tubería PVC 1/2", codos, tes y tapones</p>
-        <img src="images/Estructura.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl"></div>
+        <img src="images/Estructura.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Propulsión</p><p class="text-sm text-blue mt-1">Bomba de bicicleta con manómetro, válvula de liberación</p>
-        <img src="images/Propulsion.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl"></div>
+        <img src="images/Propulsion.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Cohetes</p><p class="text-sm text-blue mt-1">Botellas de soda 2–3 L, cartón, cinta de embalaje</p>
-        <img src="images/Cohetes.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl"></div>
-        <div class="bg-paper p-5"><p class="text-sm font-semibold">Seguridad</p><p class="text-sm text-blue mt-1">Gafas protectoras, conos, cinta métrica larga</p></div>
+        <img src="images/Cohetes.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Consumibles</p><p class="text-sm text-blue mt-1">Marcadores, cartulinas, agua</p>
+        <img src="images/Consumibles.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Taller</p><p class="text-sm text-blue mt-1">Pistolas de silicón caliente, cúter, tijeras</p>
-        <img src="images/Taller.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl"></div>
-        <div class="bg-paper p-5"><p class="text-sm font-semibold">Ensayo</p><p class="text-sm text-blue mt-1">Espagueti crudo, malvaviscos, hilo, popotes</p></div>
-        <div class="bg-paper p-5"><p class="text-sm font-semibold">Registro</p><p class="text-sm text-blue mt-1">Cronómetro, cinta métrica, bitácora impresa</p></div>
-        <div class="bg-paper p-5"><p class="text-sm font-semibold">Consumibles</p><p class="text-sm text-blue mt-1">Agua, cinta adhesiva, cartulina, marcadores</p></div>
+        <img src="images/Taller.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Ensayo</p><p class="text-sm text-blue mt-1">Espagueti crudo, malvaviscos, jeringas, popotes</p>
+        <img src="images/Ensayo.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Registro</p><p class="text-sm text-blue mt-1">Cronómetro, cinta métrica, bitácora impresa</p>
+        <img src="images/Registro.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold"></p><p class="text-sm text-blue mt-1"></p></div>
       </div>
     </div>
 
@@ -254,7 +277,7 @@
           <tr><td class="py-3 pr-4 stage-num text-flame">04</td><td class="py-3 pr-4">Aerodinámica y resistencia</td><td class="py-3 text-blue">Hojas de papel, cartulina, ventilador de mesa</td></tr>
           <tr><td class="py-3 pr-4 stage-num text-flame">05</td><td class="py-3 pr-4">Base de PVC</td><td class="py-3 text-blue">Popotes, clips, plastilina</td></tr>
           <tr><td class="py-3 pr-4 stage-num text-flame">06</td><td class="py-3 pr-4">Mecanismo de disparo</td><td class="py-3 text-blue">Hojas de boceto, regla, calculadora</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">07</td><td class="py-3 pr-4">Construcción del cuerpo</td><td class="py-3 text-blue">Botellas de soda, cartón, silicón caliente</td></tr>
+          <tr><td class="py-3 pr-4 stage-num text-flame">07</td><td class="py-3 pr-4">Construcción del cohete</td><td class="py-3 text-blue">Botellas de soda, cartón, silicón caliente</td></tr>
           <tr><td class="py-3 pr-4 stage-num text-flame">08</td><td class="py-3 pr-4">Balance de peso</td><td class="py-3 text-blue">Tubería PVC, codos, tes, pegamento para PVC</td></tr>
           <tr><td class="py-3 pr-4 stage-num text-flame">09</td><td class="py-3 pr-4">Pruebas y ajustes</td><td class="py-3 text-blue">Bomba de bicicleta, agua, cinta métrica</td></tr>
           <tr><td class="py-3 pr-4 stage-num text-flame">10</td><td class="py-3 pr-4">Día de lanzamiento</td><td class="py-3 text-blue">Gafas protectoras, conos, cámara de video</td></tr>
@@ -362,7 +385,7 @@
       <summary class="flex items-center justify-between gap-4">
         <div class="flex items-baseline gap-5">
           <span class="stage-num text-flame text-sm">07</span>
-          <span class="font-display font-600 text-lg md:text-xl">Construcción del cuerpo</span>
+          <span class="font-display font-600 text-lg md:text-xl">Construcción del cohete</span>
         </div>
         <svg class="chevron w-4 h-4 text-blue shrink-0" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </summary>
@@ -429,7 +452,7 @@
     <div class="mt-12 grid md:grid-cols-3 gap-6">
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
-          <video class="w-full h-full object-cover" controls>
+          <video class="w-full h-full object-cover" controls preload="none">
             <source src="Lanzamiento_con_compresor.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
@@ -441,7 +464,7 @@
 
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
-          <video class="w-full h-full object-cover" controls>
+          <video class="w-full h-full object-cover" controls preload="none">
             <source src="Prueba_con_bomba.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
@@ -453,7 +476,7 @@
 
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
-          <video class="w-full h-full object-cover" controls>
+          <video class="w-full h-full object-cover" controls preload="none">
             <source src="Prueba_con_compresor.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
@@ -471,9 +494,170 @@
 
 <!-- ============ FOOTER ============ -->
 <footer class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-blue">
-  <p>Gay el que lo lea</p>
-  <p class="font-mono text-xs">v1.5</p>
+  <p>v1.6</p>
+  <p class="font-mono text-xs"><v1 class="6"></v1></p>
 </footer>
+
+<!-- ============ CHATBOT (FAQ local, sin backend) ============ -->
+<button id="chat-toggle" aria-label="Abrir chat de preguntas" aria-expanded="false"
+  class="fixed bottom-6 right-6 z-[60] w-[84px] h-[84px] rounded-full p-1.5 bg-white border-[5px] border-flame flex items-center justify-center hover:scale-105 transition-transform">
+  <img src="images/Astronauta.png" alt="Asistente astronauta" class="w-full h-full rounded-full object-cover">
+  <span id="chat-close-badge" class="hidden absolute -top-1 -right-1 w-7 h-7 rounded-full bg-ink text-white flex items-center justify-center border-2 border-white">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </span>
+</button>
+
+<div id="chat-panel" class="hidden fixed bottom-32 right-6 z-[60] w-[calc(100vw-3rem)] max-w-sm h-[70vh] max-h-[520px] bg-white rounded-2xl border border-blue/15 flex flex-col overflow-hidden">
+  <div class="bg-ink text-paper px-4 py-3 flex items-center justify-between">
+    <div>
+      <p class="font-display font-600 text-sm">Asistente del taller</p>
+      <p class="text-xs text-blue-light">Pregúntame sobre sesiones, materiales o el lanzamiento</p>
+    </div>
+  </div>
+  <div id="chat-log" class="flex-1 overflow-y-auto p-4 space-y-3 text-sm bg-paper"></div>
+  <form id="chat-form" class="border-t border-blue/15 p-3 flex gap-2 bg-white">
+    <input id="chat-input" type="text" autocomplete="off" placeholder="Escribe tu pregunta…"
+      class="flex-1 text-sm rounded-full border border-blue/20 px-4 py-2 focus:outline-none focus:border-flame">
+    <button type="submit" class="bg-flame text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-orange-600 transition-colors">
+      Enviar
+    </button>
+  </form>
+</div>
+
+<script>
+(function () {
+  // ---- 1. Base de conocimiento: cada entrada tiene palabras clave y una respuesta ----
+  // Editable: agrega o cambia entradas aquí sin tocar el resto del script.
+  const KB = [
+    { kw: ['sesion', 'sesiones', 'cuantas', 'programa', 'clases'],
+      a: 'El taller tiene 10 sesiones de 40 minutos cada una, desde "Torre de espaguetis" hasta el "Día de lanzamiento". Puedes verlas todas en la sección "Sesiones".' },
+    { kw: ['angulo', 'grados', '45'],
+      a: 'La base de lanzamiento se fija a un ángulo de 45°, que es el que da mayor alcance horizontal a un proyectil.' },
+    { kw: ['material', 'materiales', 'necesito', 'comprar', 'lista'],
+      a: 'Hay un manifiesto general que adquiere la escuela (PVC, bomba de bicicleta, botellas de soda, seguridad, taller, ensayo, registro y consumibles) y materiales específicos por sesión. Revisa la sección "Materiales" para el detalle completo.' },
+    { kw: ['cohete', 'botella', 'aletas', 'cono'],
+      a: 'El cohete se construye con botellas de soda de 2–3 L, usando agua como masa de reacción y aire comprimido como propulsión. Se le agregan aletas y un cono de nariz para estabilidad y aerodinámica.' },
+    { kw: ['base', 'lanzador', 'pvc', 'tuberia'],
+      a: 'La base de lanzamiento es una estructura de tubería y conexiones de PVC, con soporte ajustable a 45° y un mecanismo de liberación remoto.' },
+    { kw: ['presion', 'bomba', 'aire', 'compresor'],
+      a: 'El cohete se presuriza con una bomba de bicicleta convencional (o un compresor de aire en algunas pruebas). La presión de aire empuja el agua para generar el impulso.' },
+    { kw: ['lanzamiento', 'lanzar', 'dia', 'final'],
+      a: 'El lanzamiento final ocurre en la sesión 10, en el patio de la escuela, frente a todo el grupo. Se mide distancia y altura estimada, y se premia el vuelo más exitoso.' },
+    { kw: ['video', 'videos', 'grabacion'],
+      a: 'En la sección "Videos" puedes ver grabaciones de lanzamientos y pruebas anteriores, tanto con bomba de bicicleta como con compresor de aire.' },
+    { kw: ['seguridad', 'gafas', 'proteccion'],
+      a: 'Para las pruebas y el lanzamiento final se usan gafas protectoras y conos de seguridad para delimitar la zona de disparo.' },
+    { kw: ['duracion', 'cuanto dura', 'tiempo'],
+      a: 'Cada sesión dura 40 minutos, y el taller completo son 10 sesiones (un trimestre).' },
+  ];
+
+  const FALLBACK = 'No tengo una respuesta preparada para eso todavía. Prueba preguntando sobre las sesiones, los materiales, la base de lanzamiento, la presión/propulsión o el día de lanzamiento — o revisa esas secciones directamente en la página.';
+  const GREETING = '¡Hola! Soy el asistente del taller "Ingeniería en el Aire". Pregúntame sobre las sesiones, los materiales, la base de lanzamiento o el día del lanzamiento.';
+
+  // ---- 2. Normalización simple (minúsculas, sin acentos) ----
+  function normalize(str) {
+    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  // ---- 3. Búsqueda del mejor match por conteo de palabras clave encontradas ----
+  function findAnswer(question) {
+    const q = normalize(question);
+    let best = null, bestScore = 0;
+    for (const entry of KB) {
+      let score = 0;
+      for (const kw of entry.kw) {
+        if (q.includes(normalize(kw))) score++;
+      }
+      if (score > bestScore) { bestScore = score; best = entry; }
+    }
+    return bestScore > 0 ? best.a : FALLBACK;
+  }
+
+  // ---- 4. UI: abrir/cerrar panel, enviar mensajes ----
+  function initChat() {
+    const toggleBtn  = document.getElementById('chat-toggle');
+    const panel      = document.getElementById('chat-panel');
+    const log        = document.getElementById('chat-log');
+    const form       = document.getElementById('chat-form');
+    const input      = document.getElementById('chat-input');
+    const closeBadge = document.getElementById('chat-close-badge');
+
+    // Si falta alguno de estos elementos, el chat no puede funcionar.
+    // Lo avisamos claramente en consola en vez de fallar en silencio.
+    const required = { toggleBtn, panel, log, form, input, closeBadge };
+    for (const [name, el] of Object.entries(required)) {
+      if (!el) {
+        console.error('[chatbot] No se encontró el elemento "' + name + '" en el DOM. Revisa que el HTML del widget esté completo y sin ids duplicados.');
+        return; // no seguimos: mejor un chat inactivo que uno roto a medias
+      }
+    }
+
+    let greeted = false;
+
+    function addBubble(text, who) {
+      const wrap = document.createElement('div');
+      wrap.className = who === 'user' ? 'flex justify-end' : 'flex items-end gap-2 justify-start';
+
+      if (who !== 'user') {
+        const avatar = document.createElement('img');
+        avatar.src = 'images/Astronauta.png';
+        avatar.alt = 'Astronauta';
+        avatar.className = 'w-8 h-8 rounded-full object-cover border-2 border-flame shrink-0';
+        wrap.appendChild(avatar);
+      }
+
+      const bubble = document.createElement('div');
+      bubble.className = (who === 'user' ? 'chat-bubble-user' : 'chat-bubble-bot') +
+        ' max-w-[75%] rounded-2xl px-3 py-2 leading-snug';
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      log.appendChild(wrap);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function openPanel() {
+      panel.classList.remove('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      closeBadge.classList.remove('hidden');
+      if (!greeted) { addBubble(GREETING, 'bot'); greeted = true; }
+      input.focus();
+    }
+
+    function closePanel() {
+      panel.classList.add('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      closeBadge.classList.add('hidden');
+    }
+
+    toggleBtn.addEventListener('click', function () {
+      panel.classList.contains('hidden') ? openPanel() : closePanel();
+    });
+
+    function sendCurrentMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+      addBubble(text, 'user');
+      input.value = '';
+      setTimeout(function () { addBubble(findAnswer(text), 'bot'); }, 300);
+    }
+
+    // El evento 'submit' cubre tanto el clic en el botón (type="submit")
+    // como presionar Enter dentro del input — un solo lugar, sin duplicar envíos.
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      sendCurrentMessage();
+    });
+
+    console.log('[chatbot] Widget inicializado correctamente.');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChat);
+  } else {
+    initChat();
+  }
+})();
+</script>
 
 </body>
 </html>
