@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingeniería en el Aire · Taller de Física</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,15 +118,20 @@
       <span class="w-2.5 h-2.5 rounded-full bg-flame"></span>
       Ingeniería en el Aire
     </a>
-    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-blue">
-      <a href="#objetivo" class="hover:text-flame transition-colors">Objetivo final</a>
-      <a href="#materiales" class="hover:text-flame transition-colors">Materiales</a>
-      <a href="#sesiones" class="hover:text-flame transition-colors">Sesiones</a>
-      <a href="#videos" class="hover:text-flame transition-colors">Videos</a>
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-blue">
+        <a href="#objetivo" class="hover:text-flame transition-colors">Objetivo final</a>
+        <a href="#materiales" class="hover:text-flame transition-colors">Materiales</a>
+        <a href="#sesiones" class="hover:text-flame transition-colors">Sesiones</a>
+        <a href="#videos" class="hover:text-flame transition-colors">Videos</a>
+      </div>
+      <a href="#sesiones" class="hidden md:inline-flex text-sm font-semibold bg-ink text-paper px-4 py-2 rounded-full hover:bg-flame transition-colors">
+        Ver el programa
+      </a>
+      <div class="w-10 h-10 rounded-xl bg-ink p-1.5 flex items-center justify-center shrink-0">
+        <img src="images/Logo.png" alt="Logo del taller" class="w-full h-full object-contain">
+      </div>
     </div>
-    <a href="#sesiones" class="hidden md:inline-flex text-sm font-semibold bg-ink text-paper px-4 py-2 rounded-full hover:bg-flame transition-colors">
-      Ver el programa
-    </a>
   </nav>
 </header>
 
@@ -170,8 +177,8 @@
         <circle cx="430" cy="20" r="4" fill="#FFC647"/>
         <text x="8" y="226" fill="#7C97A6" font-size="11" font-family="JetBrains Mono, monospace">base</text>
         <text x="390" y="14" fill="#FFC647" font-size="11" font-family="JetBrains Mono, monospace">apogeo</text>
+        <text id="rocket" class="rocket-fly" font-size="20" text-anchor="middle" dominant-baseline="central">🚀</text>
       </svg>
-      <div class="rocket-fly absolute top-0 left-0 text-2xl" id="rocket">🚀</div>
     </div>
   </div>
 </section>
@@ -208,6 +215,7 @@
             <li class="flex gap-2"><span class="text-flame">＋</span> Soporte fijo a 45°</li>
             <li class="flex gap-2"><span class="text-flame">＋</span> Mecanismo de liberación remoto</li>
           </ul>
+          <img src="images/base.png" alt="base de PVC" class="w-full h-auto rounded-xl mt-5" loading="lazy" decoding="async">
         </div>
         <div class="p-8">
           <h3 class="font-display font-600 text-xl">Cohete de agua y aire</h3>
@@ -219,6 +227,7 @@
             <li class="flex gap-2"><span class="text-flame">＋</span> Aletas y cono de nariz</li>
             <li class="flex gap-2"><span class="text-flame">＋</span> Presurización con bomba de bicicleta</li>
           </ul>
+          <img src="images/cohete.png" alt="cohete de agua y aire" class="w-full h-auto rounded-xl mt-5" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="px-8 py-5 bg-ink text-paper text-sm flex flex-wrap items-center justify-between gap-3">
@@ -242,48 +251,24 @@
       <h3 class="font-display font-600 text-lg mb-4">Manifiesto general (adquiere la escuela)</h3>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-blue/15 border border-blue/15 rounded-xl overflow-hidden">
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Estructura</p><p class="text-sm text-blue mt-1">Tubería PVC 1/2", codos, tes y tapones</p>
-        <img src="images/Estructura.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <img src="images/Estructura.png" alt="Tubería PVC" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Propulsión</p><p class="text-sm text-blue mt-1">Bomba de bicicleta con manómetro, válvula de liberación</p>
-        <img src="images/Propulsion.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <img src="images/Propulsion.png" alt="Bomba de bicicleta, válvula de liberación" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Cohetes</p><p class="text-sm text-blue mt-1">Botellas de soda 2–3 L, cartón, cinta de embalaje</p>
-        <img src="images/Cohetes.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <img src="images/Cohetes.png" alt="Botellas de soda, cartón, cinta de embalaje" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Consumibles</p><p class="text-sm text-blue mt-1">Marcadores, cartulinas, agua</p>
-        <img src="images/Consumibles.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <img src="images/Consumibles.png" alt="Marcadores, cartulinas, agua" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Taller</p><p class="text-sm text-blue mt-1">Pistolas de silicón caliente, cúter, tijeras</p>
-        <img src="images/Taller.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <img src="images/Taller.png" alt="Pistolas de silicón caliente, cúter, tijeras" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
         <div class="bg-paper p-5"><p class="text-sm font-semibold">Ensayo</p><p class="text-sm text-blue mt-1">Espagueti crudo, malvaviscos, jeringas, popotes</p>
-        <img src="images/Ensayo.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
-        <div class="bg-paper p-5"><p class="text-sm font-semibold">Registro</p><p class="text-sm text-blue mt-1">Cronómetro, cinta métrica, bitácora impresa</p>
-        <img src="images/Registro.png" alt="Cuter, tijeras, pistola de silicón" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
-        <div class="bg-paper p-5"><p class="text-sm font-semibold"></p><p class="text-sm text-blue mt-1"></p></div>
+        <img src="images/Ensayo.png" alt="Espagueti crudo, malvaviscos, jeringas, popotes" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Registro</p><p class="text-sm text-blue mt-1">Cronómetro, cinta métrica, cuaderno</p>
+        <img src="images/Registro.png" alt="Cronómetro, cinta métrica, cuaderno" class="w-full h-auto rounded-xl" loading="lazy" decoding="async"></div>
+        <div class="bg-paper p-5"><p class="text-sm font-semibold">Costo Total Aproximado (Cohete y Base)</p><p class="text-sm text-blue mt-1">$400 - $600</p></div>
       </div>
     </div>
 
-    <!-- Materiales por sesión -->
-    <div class="mt-14 overflow-x-auto">
-      <h3 class="font-display font-600 text-lg mb-4">Lo que se usa en cada sesión</h3>
-      <table class="w-full text-sm border-collapse min-w-[640px]">
-        <thead>
-          <tr class="text-left text-blue border-b border-blue/20">
-            <th class="py-3 pr-4 font-medium w-16">#</th>
-            <th class="py-3 pr-4 font-medium">Sesión</th>
-            <th class="py-3 font-medium">Material específico</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-blue/10">
-          <tr><td class="py-3 pr-4 stage-num text-flame">01</td><td class="py-3 pr-4">Torre de espaguetis</td><td class="py-3 text-blue">Espagueti crudo, malvaviscos, cinta métrica</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">02</td><td class="py-3 pr-4">Fuerzas y movimiento</td><td class="py-3 text-blue">Carritos de juguete, canicas, rampa de cartón</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">03</td><td class="py-3 pr-4">Presión y aire</td><td class="py-3 text-blue">Jeringas, globos, botella PET vacía</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">04</td><td class="py-3 pr-4">Aerodinámica y resistencia</td><td class="py-3 text-blue">Hojas de papel, cartulina, ventilador de mesa</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">05</td><td class="py-3 pr-4">Base de PVC</td><td class="py-3 text-blue">Popotes, clips, plastilina</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">06</td><td class="py-3 pr-4">Mecanismo de disparo</td><td class="py-3 text-blue">Hojas de boceto, regla, calculadora</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">07</td><td class="py-3 pr-4">Construcción del cohete</td><td class="py-3 text-blue">Botellas de soda, cartón, silicón caliente</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">08</td><td class="py-3 pr-4">Balance de peso</td><td class="py-3 text-blue">Tubería PVC, codos, tes, pegamento para PVC</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">09</td><td class="py-3 pr-4">Pruebas y ajustes</td><td class="py-3 text-blue">Bomba de bicicleta, agua, cinta métrica</td></tr>
-          <tr><td class="py-3 pr-4 stage-num text-flame">10</td><td class="py-3 pr-4">Día de lanzamiento</td><td class="py-3 text-blue">Gafas protectoras, conos, cámara de video</td></tr>
-        </tbody>
-      </table>
-    </div>
+    
   </div>
 </section>
 
@@ -452,7 +437,7 @@
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
           <video class="w-full h-full object-cover" controls preload="none">
-            <source src="Lanzamiento_con_compresor.mp4">
+            <source src="videos/Lanzamiento_con_compresor.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
         </div>
@@ -464,7 +449,7 @@
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
           <video class="w-full h-full object-cover" controls preload="none">
-            <source src="Prueba_con_bomba.mp4">
+            <source src="videos/Prueba_con_bomba.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
         </div>
@@ -476,7 +461,7 @@
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
           <video class="w-full h-full object-cover" controls preload="none">
-            <source src="Prueba_con_compresor.mp4">
+            <source src="videos/Prueba_con_compresor.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
         </div>
@@ -548,6 +533,8 @@
       a: 'Para las pruebas y el lanzamiento final se usan gafas protectoras y conos de seguridad para delimitar la zona de disparo.' },
     { kw: ['duracion', 'cuanto dura', 'tiempo'],
       a: 'Cada sesión dura 40 minutos, y el taller completo son 10 sesiones (un trimestre).' },
+    { kw: ['costo', 'precio', 'dinero'],
+      a: 'El costo total aproximado del taller es de $400 - $600, que incluye todos los materiales para la construcción del cohete y base.' },
   ];
 
   const FALLBACK = 'No tengo una respuesta preparada para eso todavía. Prueba preguntando sobre las sesiones, los materiales, la base de lanzamiento, la presión/propulsión o el día de lanzamiento — o revisa esas secciones directamente en la página.';
