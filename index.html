@@ -116,7 +116,7 @@
   <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
     <a href="#inicio" class="font-display font-700 text-lg tracking-tight flex items-center gap-2">
       <span class="w-2.5 h-2.5 rounded-full bg-flame"></span>
-      Ingeniería en el Aire
+      Ingeniería en el aire
     </a>
     <div class="flex items-center gap-4">
       <div class="hidden md:flex items-center gap-8 text-sm font-medium text-blue">
@@ -436,7 +436,7 @@
     <div class="mt-12 grid md:grid-cols-3 gap-6">
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
-          <video class="w-full h-full object-cover" controls preload="none">
+          <video class="w-full h-full object-cover video-poster-gen" controls preload="metadata">
             <source src="videos/Lanzamiento_con_compresor.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
@@ -448,7 +448,7 @@
 
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
-          <video class="w-full h-full object-cover" controls preload="none">
+          <video class="w-full h-full object-cover video-poster-gen" controls preload="metadata">
             <source src="videos/Prueba_con_bomba.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
@@ -460,7 +460,7 @@
 
       <div class="rounded-xl border border-paper/15 overflow-hidden bg-white/5">
         <div class="aspect-video flex items-center justify-center relative grid-paper-dark">
-          <video class="w-full h-full object-cover" controls preload="none">
+          <video class="w-full h-full object-cover video-poster-gen" controls preload="metadata">
             <source src="videos/Prueba_con_compresor.mp4">
             Tu navegador no soporta la reproducción de video.
           </video>
@@ -471,15 +471,32 @@
       </div>
     </div>
 
+    <script>
+      // Auto-generar poster (fotograma inicial) de cada video
+      document.querySelectorAll('.video-poster-gen').forEach(video => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
-    </p>
+        video.addEventListener('loadedmetadata', () => {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          ctx.drawImage(video, 0, 0);
+          video.poster = canvas.toDataURL();
+        }, { once: true });
+
+        // Fuerza que el navegador cargue los metadatos para extraer el fotograma
+        // currentTime = 0.5 captura el frame a los 0.5 segundos del video
+        video.currentTime = 0.5;
+      });
+    </script>
+
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
 <footer class="max-w-6xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-blue">
-  <p>v1.6</p>
-  <p class="font-mono text-xs"><v1 class="6"></v1></p>
+  <p> </p>
+  <p class="font-mono text-xs"><v1 class="7"></v1></p>
 </footer>
 
 <!-- ============ CHATBOT (FAQ local, sin backend) ============ -->
@@ -515,25 +532,23 @@
   const KB = [
     { kw: ['sesion', 'sesiones', 'cuantas', 'programa', 'clases'],
       a: 'El taller tiene 10 sesiones de 40 minutos cada una, desde "Torre de espaguetis" hasta el "Día de lanzamiento". Puedes verlas todas en la sección "Sesiones".' },
-    { kw: ['angulo', 'grados', '45'],
+    { kw: ['angulo', 'grados', '45', 'lanzamiento', 'alcance', 'direccion'],
       a: 'La base de lanzamiento se fija a un ángulo de 45°, que es el que da mayor alcance horizontal a un proyectil.' },
     { kw: ['material', 'materiales', 'necesito', 'comprar', 'lista'],
       a: 'Hay un manifiesto general que adquiere la escuela (PVC, bomba de bicicleta, botellas de soda, seguridad, taller, ensayo, registro y consumibles) y materiales específicos por sesión. Revisa la sección "Materiales" para el detalle completo.' },
-    { kw: ['cohete', 'botella', 'aletas', 'cono'],
+    { kw: ['cohete', 'botella', 'aletas', 'cono', 'soda'],
       a: 'El cohete se construye con botellas de soda de 2–3 L, usando agua como masa de reacción y aire comprimido como propulsión. Se le agregan aletas y un cono de nariz para estabilidad y aerodinámica.' },
-    { kw: ['base', 'lanzador', 'pvc', 'tuberia'],
+    { kw: ['base', 'lanzador', 'pvc', 'tuberia', 'soporte'],
       a: 'La base de lanzamiento es una estructura de tubería y conexiones de PVC, con soporte ajustable a 45° y un mecanismo de liberación remoto.' },
     { kw: ['presion', 'bomba', 'aire', 'compresor'],
       a: 'El cohete se presuriza con una bomba de bicicleta convencional (o un compresor de aire en algunas pruebas). La presión de aire empuja el agua para generar el impulso.' },
     { kw: ['lanzamiento', 'lanzar', 'dia', 'final'],
       a: 'El lanzamiento final ocurre en la sesión 10, en el patio de la escuela, frente a todo el grupo. Se mide distancia y altura estimada, y se premia el vuelo más exitoso.' },
-    { kw: ['video', 'videos', 'grabacion'],
+    { kw: ['video', 'videos', 'grabacion', 'evidencia'],
       a: 'En la sección "Videos" puedes ver grabaciones de lanzamientos y pruebas anteriores, tanto con bomba de bicicleta como con compresor de aire.' },
-    { kw: ['seguridad', 'gafas', 'proteccion'],
-      a: 'Para las pruebas y el lanzamiento final se usan gafas protectoras y conos de seguridad para delimitar la zona de disparo.' },
-    { kw: ['duracion', 'cuanto dura', 'tiempo'],
+    { kw: ['duracion', 'cuanto dura', 'horas', 'tiempo'],
       a: 'Cada sesión dura 40 minutos, y el taller completo son 10 sesiones (un trimestre).' },
-    { kw: ['costo', 'precio', 'dinero'],
+    { kw: ['costo', 'precio', 'cuanto cuesta', 'pesos', 'dinero'],
       a: 'El costo total aproximado del taller es de $400 - $600, que incluye todos los materiales para la construcción del cohete y base.' },
   ];
 
